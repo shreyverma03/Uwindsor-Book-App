@@ -6,7 +6,7 @@ import MovieScreen from '../screens/MoviesScreen';
 import PersonScreen from '../screens/PersonScreen';
 import SearchScreen from '../screens/SearchScreen';
 import OSBookDetailsScreen from '../screens/OSBookDetailsScreen';
-import UniversityBookDetailsScreen from '../screens/OSBookDetailsScreen';
+import UniversityBookDetailsScreen from '../screens/UniversityBookDetailsScreen';
 
 
 const Stack = createNativeStackNavigator();
