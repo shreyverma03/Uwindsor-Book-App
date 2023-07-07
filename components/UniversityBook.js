@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 var { width, height } = Dimensions.get('window');
 
-const BookCarousel = ({ navigation }) => {
+const BookCarousel = ( ) => {
   const [books, setBooks] = useState();
-
+  const navigation = useNavigation();
   useEffect(() => {
     fetchBooks();
   }, []);
@@ -19,9 +20,9 @@ const BookCarousel = ({ navigation }) => {
       console.log(data);
       const {docs} = data;
      //const {records} = data;
-     // const randomBooks = getRandomBooks(docs, 5); 
-     const booksWithImages = docs.filter((book) => book.pnx.addata.isbn); // Filter out books without isbn
-      setBooks(docs); 
+     const randomBooks = getRandomBooks(docs, 50); 
+    // const booksWithImages = docs.filter((book) => book.pnx.addata.isbn); // Filter out books without isbn
+      setBooks(randomBooks); 
     } catch (error) {
       console.error('Error fetching books:', error);
     }
@@ -33,7 +34,7 @@ const BookCarousel = ({ navigation }) => {
 
   const handleBookPress = (book) => {
     // Navigate to the desired screen passing the book data as a parameter
-    navigation.navigate('BookDetails', { book });
+    navigation.navigate('UniversityBookDetails', { book });
   };
   
   const renderBookItem = ({ item }) => {
