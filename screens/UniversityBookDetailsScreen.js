@@ -25,7 +25,7 @@ const UniversityBookDetailsScreen = ({ route }) => {
     contentContainerStyle={{paddingBottom: 20}} 
     className="flex-1 bg-neutral-900">
 
-  {/* back button and movie poster */}
+  {/* back button and book poster */}
   <View className="w-full">
     <SafeAreaView className={"absolute z-20 w-full flex-row justify-between items-center px-4 "+topMargin}>
         <TouchableOpacity style={styles.background} className="rounded-xl p-1" onPress={()=> navigation.goBack()}>

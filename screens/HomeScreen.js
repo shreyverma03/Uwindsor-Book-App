@@ -2,13 +2,10 @@ import { View, Image, Text, TouchableOpacity, ScrollView, Platform, StyleSheet }
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {Bars3CenterLeftIcon, MagnifyingGlassIcon} from 'react-native-heroicons/outline'
-import TrendingMovies from '../components/trendingMovies';
 import BookCarousel from '../components/BookCarousel';
 import UniversityBook from '../components/UniversityBook';
-import MovieList from '../components/movieList';
 
 import { StatusBar } from 'expo-status-bar';
-import { fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies } from '../api/moviedb';
 import { useNavigation } from '@react-navigation/native';
 import Loading from '../components/loading';
 import { styles } from '../theme';
@@ -27,20 +24,6 @@ export default function HomeScreen() {
   const [trending, setTrending] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
-
-
-  useEffect(()=>{
-    getTrendingMovies();
-  
-  },[]);
-
-  const getTrendingMovies = async ()=>{
-    const data = await fetchTrendingMovies();
-     
-    if(data && data.results) setTrending(data.results);
-    setLoading(false)
-  }
-
 
 
 
@@ -63,22 +46,19 @@ export default function HomeScreen() {
         </View>
       </SafeAreaView>
       {
-        loading? (
-          <Loading />
-        ):(
           <ScrollView 
             showsVerticalScrollIndicator={false} 
             contentContainerStyle={{paddingBottom: 10}}
           >
       
-      { trending.length>0 && <TrendingMovies data={trending} /> }
+      
       <BookCarousel />
       <UniversityBook />
             
             
 
           </ScrollView>
-        )
+        
       }
   </View>
   )

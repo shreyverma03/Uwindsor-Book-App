@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 var { width, height } = Dimensions.get('window');
 
+
 const BookCarousel = ( ) => {
   const [books, setBooks] = useState();
   const navigation = useNavigation();
@@ -20,7 +21,7 @@ const BookCarousel = ( ) => {
       console.log(data);
       const {docs} = data;
      //const {records} = data;
-     const randomBooks = getRandomBooks(docs, 50); 
+     const randomBooks = getRandomBooks(docs, 20); 
     // const booksWithImages = docs.filter((book) => book.pnx.addata.isbn); // Filter out books without isbn
       setBooks(randomBooks); 
     } catch (error) {
