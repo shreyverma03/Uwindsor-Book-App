@@ -6,6 +6,8 @@ import MovieScreen from '../screens/MoviesScreen';
 import PersonScreen from '../screens/PersonScreen';
 import SearchScreen from '../screens/SearchScreen';
 import OSBookDetailsScreen from '../screens/OSBookDetailsScreen';
+import UniversityBookDetailsScreen from '../screens/UniversityBookDetailsScreen';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +21,7 @@ export default function AppNavigation() {
         <Stack.Screen name="OSBookDetails" options={{headerShown: false}} component={OSBookDetailsScreen} />
         <Stack.Screen name="Person" options={{headerShown: false}} component={PersonScreen} />
         <Stack.Screen name="Search" options={{headerShown: false}} component={SearchScreen} />
+        <Stack.Screen name="UniversityBookDetails" options={{headerShown: false}} component={UniversityBookDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )
