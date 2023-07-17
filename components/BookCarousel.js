@@ -58,7 +58,8 @@ const BookCarousel = () => {
 
   return (
     <View >
-        <Text className="text-black text-xl mx-4 mb-5">Open Source Books</Text>
+          <Text className="text-black text-xl mx-4 mb-5 font-bold" >Open Source Books</Text>
+          <Text style={{ color: "#60a7db", marginTop: -35, paddingStart: 15, paddingBottom: 15, fontWeight: 'bold' }}>_____________________________</Text>
       <Carousel
         data={books}
         renderItem={renderBookItem}

@@ -7,12 +7,12 @@ import { useNavigation } from '@react-navigation/native';
 var { width, height } = Dimensions.get('window');
 
 const BookCarousel = ( ) => {
-  const dummyImage= "https://uwindsor.primo.exlibrisgroup.com/discovery/custom/01UTON_UW-UWINDSOR/img/icon_book.png";
   const [books, setBooks] = useState();
   const navigation = useNavigation();
   useEffect(() => {
     fetchBooks();
   }, []);
+
 
   const fetchBooks = async () => {
     try {
@@ -41,8 +41,8 @@ const BookCarousel = ( ) => {
   const renderBookItem = ({ item }) => {
    // console.log(item.addata);
     const coverid = item.pnx.addata.isbn;
- // const imageUrl = `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${coverid}/sc.jpg`;
-  const imageUrl= item.pnx.addata.isbn ? `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${item.pnx.addata.isbn}/sc.jpg` : dummyImage;
+  const imageUrl = `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${coverid}/sc.jpg`;
+
   return (
     <TouchableOpacity onPress={() => handleBookPress(item)}>
       <View>
@@ -62,7 +62,8 @@ const BookCarousel = ( ) => {
 
   return (
     <View>
-      <Text className="text-black text-xl mx-4 mb-5">University Books</Text>
+          <Text className="text-black text-xl mx-4 mb-5 font-bold">University Books</Text>
+          <Text style={{ color: "#60a7db", marginTop: -35, paddingStart: 15, paddingBottom: 15, fontWeight: 'bold' }}>_____________________________</Text>
       <Carousel
         data={books}
         renderItem={renderBookItem}
