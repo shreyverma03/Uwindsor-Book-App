@@ -14,6 +14,7 @@ var {width, height} = Dimensions.get('window');
 
 const UniversityBookDetailsScreen = ({ route }) => {
   const searchnavigate = route.params.searchnavigate;
+
   if (searchnavigate === 'false') {
   const [isFavourite, toggleFavourite] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -90,8 +91,8 @@ const UniversityBookDetailsScreen = ({ route }) => {
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
           {
-            book?.pnx.display.contributor.map((author, index) => (
-              <View key={book.pnx.display.contributor[index]} style={{ alignItems: 'center', padding: '1%' }}>
+            (book?.pnx.display.contributor || book?.pnx.display.creator)?.map((author, index) => (
+              <View key={index} style={{ alignItems: 'center', padding: '1%' }}>
                 <Image source={{ uri: 'https://static-00.iconduck.com/assets.00/person-icon-476x512-hr6biidg.png' }} style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: 'white' }} />
                 <Text style={{ color: 'white', textAlign: 'center' }}>{author}</Text>
               </View>
@@ -161,7 +162,7 @@ const UniversityBookDetailsScreen = ({ route }) => {
               {/* title */}
               <Text className="text-white text-center text-3xl font-bold tracking-widest">
                   {
-                      book?.pnx.display.title
+                      route.params.item?.pnx.display.title
                   }
               </Text>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -187,8 +188,8 @@ const UniversityBookDetailsScreen = ({ route }) => {
              
 <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
 {
-  route.params.item?.pnx.display.contributor.map((author, index) => (
-    <View key={route.params.item?.pnx.display.contributor[index]} style={{ alignItems: 'center', padding: '1%' }}>
+  (route.params.item?.pnx.display.contributor || route.params.item?.pnx.display.creator)?.map((author, index) => (
+    <View key={index} style={{ alignItems: 'center', padding: '1%' }}>
       <Image source={{ uri: 'https://static-00.iconduck.com/assets.00/person-icon-476x512-hr6biidg.png' }} style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: 'white' }} />
       <Text style={{ color: 'white', textAlign: 'center' }}>{author}</Text>
     </View>

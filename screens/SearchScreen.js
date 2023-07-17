@@ -24,6 +24,7 @@ export default function SearchScreen() {
     const [filteredDataSource, setFilteredDataSource] = useState([]);
     const [masterDataSource, setMasterDataSource] = useState([]);
 
+    const dummyimage= "https://uwindsor.primo.exlibrisgroup.com/discovery/custom/01UTON_UW-UWINDSOR/img/icon_book.png";
     useEffect(() => {
         fetchBooks();
       }, []);
@@ -40,7 +41,7 @@ export default function SearchScreen() {
          
             const randomBooks = getRandomBooks(docs, 50).map((book) => ({
                 ...book,
-                imageUrl: `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${book.pnx.addata.isbn}/sc.jpg`,
+                imageUrl: book.pnx.addata.isbn ? `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${book.pnx.addata.isbn}/sc.jpg` : dummyimage,
               }));
           
             setBooks(randomBooks); 
@@ -68,11 +69,15 @@ export default function SearchScreen() {
                 return itemData.indexOf(textData) > -1;
             }).map((book) => ({
                 ...book,
-                imageUrl: `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${book.pnx.addata.isbn}/sc.jpg`,
+                imageUrl: book.imageUrl === dummyimage ? dummyimage : book.imageUrl,
               }));
             setFilteredDataSource(newData);
             setSearchQuery(text);
         } else {
+            const newData = masterDataSource.map((book) => ({
+                ...book,
+                imageUrl: book.imageUrl === dummyimage ? dummyimage : book.imageUrl,
+              }));
             setFilteredDataSource(masterDataSource);
             setSearchQuery(text);
         }
@@ -122,13 +127,14 @@ export default function SearchScreen() {
                                         onPress={()=> navigation.push('UniversityBookDetails', {item, searchnavigate: 'true'} )}>
                                         <View className="space-y-2 mb-4">
                                             <Image
-                                            source={{ uri: item.imageUrl }}
+                                            source={{ uri: item.imageUrl === dummyimage ? dummyimage : item.imageUrl }}
                                             className="rounded-3xl" 
                                             style={{ width: width*0.44, height: height*0.3}} // adjust the width and height as per your requirement
                                             />
                                             <Text className="text-gray-300 ml-1">
                                                 {
-                                                    item.pnx.display.title
+                                                   
+                                                    item.pnx.display.title[0].length>22? item.pnx.display.title[0].slice(0,22)+'...': item.pnx.display.title
                                                 }
                                             </Text>
                                         </View>
