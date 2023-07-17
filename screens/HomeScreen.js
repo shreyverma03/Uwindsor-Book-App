@@ -71,7 +71,7 @@ export default function HomeScreen() {
             contentContainerStyle={{paddingBottom: 10}}
           >
       
-      { trending.length>0 && <TrendingMovies data={trending} /> }
+      
       <BookCarousel />
       <UniversityBook />
             

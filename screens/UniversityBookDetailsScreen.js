@@ -19,8 +19,7 @@ const UniversityBookDetailsScreen = ({ route }) => {
   const [loading, setLoading] = useState(false);
   
   const { book } = route.params;
-  console.log("route00="+JSON.stringify(route.params));
-  console.log("route100="+JSON.stringify(route));
+ 
   const coverid = route.params.book.pnx.addata.isbn;
   const navigation = useNavigation();
   const imageUrl = `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${coverid}/sc.jpg`;
@@ -30,7 +29,7 @@ const UniversityBookDetailsScreen = ({ route }) => {
     contentContainerStyle={{paddingBottom: 20}} 
     className="flex-1 bg-neutral-900">
 
-  {/* back button and movie poster */}
+  {/* back button and book poster */}
   <View className="w-full">
     <SafeAreaView className={"absolute z-20 w-full flex-row justify-between items-center px-4 "+topMargin}>
         <TouchableOpacity style={styles.background} className="rounded-xl p-1" onPress={()=> navigation.goBack()}>
