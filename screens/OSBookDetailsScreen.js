@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Text, ScrollView, StyleSheet, Dimensions, Platform, TouchableOpacity } from 'react-native';
+import { View, Image, Text, ScrollView, StyleSheet, Dimensions, Platform, TouchableOpacity, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles, theme } from '../theme';
 import { ArrowLeftIcon, ChevronLeftIcon } from 'react-native-heroicons/outline';
@@ -11,6 +11,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 const ios = Platform.OS == 'ios';
 const topMargin = ios? '':' mt-3';
 var {width, height} = Dimensions.get('window');
+
 
 const OSBookDetailsScreen = ({ route }) => {
   const [isFavourite, toggleFavourite] = useState(false);
@@ -26,7 +27,7 @@ const OSBookDetailsScreen = ({ route }) => {
     className="flex-1 bg-neutral-900">
 
   {/* back button and movie poster */}
-  <View className="w-full">
+          <View className="w-full">
     <SafeAreaView className={"absolute z-20 w-full flex-row justify-between items-center px-4 "+topMargin}>
         <TouchableOpacity style={styles.background} className="rounded-xl p-1" onPress={()=> navigation.goBack()}>
             <ChevronLeftIcon size="28" strokeWidth={2.5} color="white" />
@@ -59,36 +60,37 @@ const OSBookDetailsScreen = ({ route }) => {
 
         <View style={{marginTop: -(height*0.09)}} className="space-y-3">
         {/* title */}
-        <Text className="text-white text-center text-3xl font-bold tracking-widest">
+        <Text className="text-white text-center text-3xl font-bold tracking-widest" >
             {
                 book?.title
             }
-        </Text>
+              </Text>
+              <Text style={{ textAlign: 'center', color: 'white', padding: 10, fontWeight: 'bold' }}>_____________________________</Text>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-  <View style={{ flex: 1 }}>
-    <Text style={{ textAlign: 'center', color: 'gray', fontWeight: 'bold' }}>First Published Year</Text>
-    <Text style={{ textAlign: 'center',color: 'white'  }}>{book?.first_publish_year}</Text>
+                  <View style={{ flex: 1 }}>
+                      <Text style={{ textAlign: 'center', color: '#60a7db', fontSize: 18, fontWeight: 'bold', paddingStart:10 }}>Published Year</Text>
+                      <Text style={{ textAlign: 'center', color: 'white', fontWeight: 'bold'  }}>{book?.first_publish_year}</Text>
   </View>
   <View style={{ flex: 1 }}>
-    <Text style={{ textAlign: 'center', color: 'gray', fontWeight: 'bold' }}>Publisher</Text>
-    <Text style={{ textAlign: 'center', color: 'white',flexDirection: 'column' }}>{book?.publisher[0] || 'N/A'}</Text>
+                      <Text style={{ textAlign: 'center', color: '#60a7db', fontSize: 18, fontWeight: 'bold' }}>Publisher</Text>
+                      <Text style={{ textAlign: 'center', color: 'white', flexDirection: 'column', fontWeight: 'bold' }}>{book?.publisher[0] || 'N/A'}</Text>
   </View>
   <View style={{ flex: 1 }}>
-    <Text style={{ textAlign: 'center', color: 'gray', fontWeight: 'bold' }}>Language</Text>
-    <Text style={{ textAlign: 'center',color: 'white'  }}>{book?.language}</Text>
+                      <Text style={{ textAlign: 'center', color: '#60a7db', fontWeight: 'bold', fontSize: 18, }}>Language</Text>
+                      <Text style={{ textAlign: 'center', color: 'white'  }}>{book?.language}</Text>
   </View>
 </View>
 
         
-        <View style={{ marginTop: 20, paddingTop: 50}}>
-        <Text className="text-white text-md mx-4 mb-5">All Authors</Text>
+              <View style={{ marginTop: 20, paddingTop: 40, paddingStart: 20 }}>
+                  <Text style={{ color: '#60a7db', fontWeight: 'bold', fontSize: 18, }}>Authors</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
           {
             book?.author_name.map((author, index) => (
-              <View key={book.author_key[index]} style={{ alignItems: 'center', padding: '1%' }}>
-                <Image source={{ uri: 'https://static-00.iconduck.com/assets.00/person-icon-476x512-hr6biidg.png' }} style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: 'white' }} />
+              <View key={book.author_key[index]} style={{ alignItems: 'center', padding: 10 }}>
+                <Image source={{ uri: 'https://static-00.iconduck.com/assets.00/person-icon-476x512-hr6biidg.png' }} style={{width: 80, height: 80, borderRadius: 40, backgroundColor: 'white' }} />
                 <Text style={{ color: 'white', textAlign: 'center' }}>{author}</Text>
               </View>
             ))

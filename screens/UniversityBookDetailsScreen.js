@@ -8,33 +8,36 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'; 
 import { LinearGradient } from 'expo-linear-gradient'
 
+import { Bars3CenterLeftIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
+
 const ios = Platform.OS == 'ios';
 const topMargin = ios? '':' mt-3';
 var {width, height} = Dimensions.get('window');
 
 const UniversityBookDetailsScreen = ({ route }) => {
   const searchnavigate = route.params.searchnavigate;
-
   if (searchnavigate === 'false') {
   const [isFavourite, toggleFavourite] = useState(false);
   const [loading, setLoading] = useState(false);
   
   const { book } = route.params;
- 
+  console.log("route00="+JSON.stringify(route.params));
+  console.log("route100="+JSON.stringify(route));
   const coverid = route.params.book.pnx.addata.isbn;
   const navigation = useNavigation();
   const imageUrl = `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${coverid}/sc.jpg`;
-  return (
+      return (
+
     
     <ScrollView 
-    contentContainerStyle={{paddingBottom: 20}} 
-    className="flex-1 bg-neutral-900">
-
-  {/* back button and book poster */}
+    contentContainerStyle={{paddingBottom: 30}} 
+    className=" bg-neutral-900">
+             
+  {/* back button and movie poster */}
   <View className="w-full">
-    <SafeAreaView className={"absolute z-20 w-full flex-row justify-between items-center px-4 "+topMargin}>
-        <TouchableOpacity style={styles.background} className="rounded-xl p-1" onPress={()=> navigation.goBack()}>
-            <ChevronLeftIcon size="28" strokeWidth={2.5} color="white" />
+              <SafeAreaView className={"absolute z-20 w-full flex-row justify-between items-center px-4 " + topMargin}>
+                      <TouchableOpacity style={styles.background} className="rounded-xl p-1" onPress={() => navigation.goBack()}>
+                      <ChevronLeftIcon size="30" strokeWidth={2.5} color="white" />
         </TouchableOpacity>
 
         <TouchableOpacity onPress={()=> toggleFavourite(!isFavourite)}>
@@ -68,33 +71,34 @@ const UniversityBookDetailsScreen = ({ route }) => {
             {
                 book?.pnx.display.title
             }
-        </Text>
+                  </Text>
+                  <Text style={{ textAlign: 'center', color: 'white', padding: 10, fontWeight: 'bold' }}>_____________________________</Text>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-  <View style={{ flex: 1 }}>
-    <Text style={{ textAlign: 'center', color: 'gray', fontWeight: 'bold' }}>First Published Year</Text>
-    <Text style={{ textAlign: 'center',color: 'white'  }}>{book?.pnx.addata.date}</Text>
+                      <View style={{ flex: 1 }}>
+                          <Text style={{ textAlign: 'center', color: '#60a7db', paddingStart: 10, fontSize:18, fontWeight: 'bold', }}>Published Year</Text>
+                      <Text style={{ textAlign: 'center', color: 'white',  }}>{book?.pnx.addata.date}</Text>
   </View>
   <View style={{ flex: 1 }}>
-    <Text style={{ textAlign: 'center', color: 'gray', fontWeight: 'bold' }}>Publisher</Text>
-    <Text style={{ textAlign: 'center', color: 'white',flexDirection: 'column' }}>{book?.pnx.display.publisher || 'N/A'}</Text>
+                          <Text style={{ textAlign: 'center', color: '#60a7db', fontSize: 18, fontWeight: 'bold', }}>Publisher</Text>
+                      <Text style={{ textAlign: 'center', color: 'white', flexDirection: 'column',  }}>{book?.pnx.display.publisher || 'N/A'}</Text>
   </View>
   <View style={{ flex: 1 }}>
-    <Text style={{ textAlign: 'center', color: 'gray', fontWeight: 'bold' }}>Language</Text>
-    <Text style={{ textAlign: 'center',color: 'white'  }}>{book?.pnx.display.language}</Text>
+                          <Text style={{ textAlign: 'center', color: '#60a7db', fontSize: 18, fontWeight: 'bold', }}>Language</Text>
+                      <Text style={{ textAlign: 'center', color: 'white'  }}>{book?.pnx.display.language}</Text>
   </View>
 </View>
 
         
-        <View style={{ marginTop: 20, paddingTop: 50}}>
-        <Text className="text-white text-md mx-4 mb-5">All Authors</Text>
+              <View style={{ marginTop: 20, paddingTop: 40, paddingStart: 20 }}>
+                      <Text style={{ color: '#60a7db', fontWeight: 'bold', fontSize: 18,  }}>Authors</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
           {
-            (book?.pnx.display.contributor || book?.pnx.display.creator)?.map((author, index) => (
-              <View key={index} style={{ alignItems: 'center', padding: '1%' }}>
-                <Image source={{ uri: 'https://static-00.iconduck.com/assets.00/person-icon-476x512-hr6biidg.png' }} style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: 'white' }} />
-                <Text style={{ color: 'white', textAlign: 'center' }}>{author}</Text>
+            book?.pnx.display.contributor.map((author, index) => (
+                <View key={book.pnx.display.contributor[index]} style={{ width: 120, alignItems: 'center', padding: 10 }} >
+                    <Image source={{ uri: 'https://static-00.iconduck.com/assets.00/person-icon-476x512-hr6biidg.png' }} style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: 'white' }} />
+                    <Text style={{ color: 'white', textAlign: 'center' }} >{author}</Text>
               </View>
             ))
           }
@@ -162,7 +166,7 @@ const UniversityBookDetailsScreen = ({ route }) => {
               {/* title */}
               <Text className="text-white text-center text-3xl font-bold tracking-widest">
                   {
-                      route.params.item?.pnx.display.title
+                      book?.pnx.display.title
                   }
               </Text>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -182,14 +186,14 @@ const UniversityBookDetailsScreen = ({ route }) => {
       
               
               <View style={{ marginTop: 20, paddingTop: 50}}>
-              <Text className="text-white text-md mx-4 mb-5">All Authors</Text>
+              <Text className="text-white text-md mx-4 mb-5">Authors</Text>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View style={{ justifyContent: 'center', alignItems: 'center' }}>
              
 <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
 {
-  (route.params.item?.pnx.display.contributor || route.params.item?.pnx.display.creator)?.map((author, index) => (
-    <View key={index} style={{ alignItems: 'center', padding: '1%' }}>
+  route.params.item?.pnx.display.contributor.map((author, index) => (
+    <View key={route.params.item?.pnx.display.contributor[index]} style={{ alignItems: 'center', padding: '1%' }}>
       <Image source={{ uri: 'https://static-00.iconduck.com/assets.00/person-icon-476x512-hr6biidg.png' }} style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: 'white' }} />
       <Text style={{ color: 'white', textAlign: 'center' }}>{author}</Text>
     </View>
