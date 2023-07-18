@@ -16,8 +16,9 @@ const {width, height} =  Dimensions.get('window');
 export default function SearchScreen() {
     const navigation = useNavigation();
     const [isLoading, setIsLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [results, setResults] = useState([]);
-    const [error, setError] = useState(null);
+   
     const [fullData, setFullData] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [books, setBooks] = useState([]);
@@ -60,12 +61,14 @@ export default function SearchScreen() {
 
       const searchFilterFunction = (text) => {
         if (text) {
+            setLoading(true);
             const newData = masterDataSource.filter((item) => {
                 
                 const itemData = item.pnx.display.title[0];
                 
                 const textData = text;
                
+                setLoading(false);
                 return itemData.indexOf(textData) > -1;
             }).map((book) => ({
                 ...book,
@@ -109,7 +112,10 @@ export default function SearchScreen() {
 
         {/* search results */}
         {
-           
+            loading? (
+                <Loading />
+            ):
+            filteredDataSource.length>0? (
                 <ScrollView 
                     showsVerticalScrollIndicator={false} 
                     contentContainerStyle={{paddingHorizontal:15}}
@@ -145,25 +151,20 @@ export default function SearchScreen() {
                     </View>
                     
                 </ScrollView>
+                ):(
+                    
+                    <View >
+                        <Text className="text-white font-semibold ml-1" style={{marginTop:height*0.02}}>Results ({filteredDataSource.length}) </Text>
+                        <View className="flex-row justify-center" style={{marginTop:height*0.15}}>
+                        <Image 
+                            source={require('../assets/images/booktime2.png')} 
+                            className="h-96 w-96"
+                        />
+                        </View>
+                    </View>
+                )
             
         }
     </SafeAreaView>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'white',
-  },
-  itemStyle: {
-    padding: 10,
-  },
-  textInputStyle: {
-    height: 100,
-    borderWidth: 1,
-    paddingLeft: 20,
-    margin: 5,
-    borderColor: '#009688',
-    backgroundColor: '#FFFFFF',
-  },
-});
+  )
+}

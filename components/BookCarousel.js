@@ -20,7 +20,7 @@ const BookCarousel = () => {
       //const data = response.data;
       const data = await response.json();
       const {docs} = data;
-      const randomBooks = getRandomBooks(docs, 20).filter((book) => book.cover_i); // Filter
+      const randomBooks = getRandomBooks(docs, 30).filter((book) => book.cover_i); // Filter
       setBooks(randomBooks); // Adjust the slice based on your API response structure
     } catch (error) {
       console.error('Error fetching books:', error);
@@ -58,7 +58,8 @@ const BookCarousel = () => {
 
   return (
     <View >
-        <Text className="text-black text-xl mx-4 mb-5">Open Source Books</Text>
+        <Text className="text-black text-xl mx-4 mb-5 font-bold" >Open Source Books</Text>
+        <Text style={{ color: "#60a7db", marginTop: -35, paddingStart: 15, paddingBottom: 15, fontWeight: 'bold' }}>_____________________________</Text>
       <Carousel
         data={books}
         renderItem={renderBookItem}

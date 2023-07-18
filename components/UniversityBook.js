@@ -12,7 +12,10 @@ const BookCarousel = ( ) => {
   const navigation = useNavigation();
   useEffect(() => {
     fetchBooks();
+    
   }, []);
+
+
 
   const fetchBooks = async () => {
     try {
@@ -54,7 +57,7 @@ const BookCarousel = ( ) => {
               }} 
         className="rounded-3xl" 
         />
-        <Text style={styles.bookTitle}>{item.pnx.display.title}</Text>
+        <Text style={styles.bookTitle}>{item.pnx.display.title[0]?.split(':')[0]}</Text>
       </View>
       </TouchableOpacity>
     );
@@ -62,7 +65,8 @@ const BookCarousel = ( ) => {
 
   return (
     <View>
-      <Text className="text-black text-xl mx-4 mb-5">University Books</Text>
+       <Text className="text-black text-xl mx-4 mb-5 font-bold">University Books</Text>
+          <Text style={{ color: "#60a7db", marginTop: -35, paddingStart: 15, paddingBottom: 15, fontWeight: 'bold' }}>_____________________________</Text>
       <Carousel
         data={books}
         renderItem={renderBookItem}
