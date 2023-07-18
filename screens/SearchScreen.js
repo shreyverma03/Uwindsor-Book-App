@@ -9,7 +9,7 @@ import { AlignCenter } from 'react-native-feather'
 import { contains } from 'lodash';
 import filter from 'lodash.filter'
 
-// const {width, height} =  Dimensions.get('window');
+const {width, height} =  Dimensions.get('window');
 
 
 
