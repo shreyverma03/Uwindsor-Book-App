@@ -6,8 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 
 var { width, height } = Dimensions.get('window');
 
-
 const BookCarousel = ( ) => {
+  const dummyImage= "https://uwindsor.primo.exlibrisgroup.com/discovery/custom/01UTON_UW-UWINDSOR/img/icon_book.png";
   const [books, setBooks] = useState();
   const navigation = useNavigation();
   useEffect(() => {
@@ -18,10 +18,10 @@ const BookCarousel = ( ) => {
     try {
       const response = await fetch('https://uwindsor.primo.exlibrisgroup.com/primaws/rest/pub/pnxs?blendFacetsSeparately=false&came_from=pagination_1_2&disableCache=false&getMore=0&inst=01UTON_UW&lang=en&limit=50&multiFacets=facet_tlevel,include,available_p&multiFacets=facet_rtype,include,books&newspapersActive=true&newspapersSearch=false&offset=0&pcAvailability=false&q=any,contains,computer+science&qExclude=&qInclude=facet_library,exact,2181%E2%80%93147948590002181&rapido=false&refEntryActive=false&rtaLinks=true&scope=OCUL_Discovery_Network&searchInFulltextUserSelection=false&skipDelivery=Y&sort=rank&tab=new_Windsor_Omni&vid=01UTON_UW:UWINDSOR');
       const data = await response.json();
-      console.log(data);
+      
       const {docs} = data;
      //const {records} = data;
-     const randomBooks = getRandomBooks(docs, 20); 
+     const randomBooks = getRandomBooks(docs, 50); 
     // const booksWithImages = docs.filter((book) => book.pnx.addata.isbn); // Filter out books without isbn
       setBooks(randomBooks); 
     } catch (error) {
@@ -35,14 +35,14 @@ const BookCarousel = ( ) => {
 
   const handleBookPress = (book) => {
     // Navigate to the desired screen passing the book data as a parameter
-    navigation.navigate('UniversityBookDetails', { book });
+    navigation.navigate('UniversityBookDetails', { book , searchnavigate: 'false'});
   };
   
   const renderBookItem = ({ item }) => {
-    console.log(item.addata);
+   // console.log(item.addata);
     const coverid = item.pnx.addata.isbn;
-  const imageUrl = `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${coverid}/sc.jpg`;
-
+ // const imageUrl = `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${coverid}/sc.jpg`;
+  const imageUrl= item.pnx.addata.isbn ? `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${item.pnx.addata.isbn}/sc.jpg` : dummyImage;
   return (
     <TouchableOpacity onPress={() => handleBookPress(item)}>
       <View>
