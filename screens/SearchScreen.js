@@ -9,7 +9,7 @@ import { AlignCenter } from 'react-native-feather'
 import { contains } from 'lodash';
 import filter from 'lodash.filter'
 
-const {width, height} =  Dimensions.get('window');
+// const {width, height} =  Dimensions.get('window');
 
 
 
@@ -148,5 +148,22 @@ export default function SearchScreen() {
             
         }
     </SafeAreaView>
-  )
-}
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
+  itemStyle: {
+    padding: 10,
+  },
+  textInputStyle: {
+    height: 100,
+    borderWidth: 1,
+    paddingLeft: 20,
+    margin: 5,
+    borderColor: '#009688',
+    backgroundColor: '#FFFFFF',
+  },
+});
