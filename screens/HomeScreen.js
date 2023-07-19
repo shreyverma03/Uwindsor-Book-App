@@ -12,7 +12,6 @@ import { fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies, searchMo
 import { useNavigation } from '@react-navigation/native';
 import Loading from '../components/loading';
 import { styles } from '../theme';
-
 import moment from 'moment';
 
 const ios = Platform.OS === 'ios';
@@ -54,7 +53,7 @@ export default function HomeScreen() {
     return (
         <View className="flex-1">
             {/* Menu bar */}
-            <SafeAreaView className={ios ? "-mb-2" : "mb-3"} style={{
+            {/* <SafeAreaView className={ios ? "-mb-2" : "mb-3"} style={{
                 backgroundColor: "#60a7db", borderRadius: 30, paddingTop: 10, marginTop:-10,
             }}>
                 <StatusBar />
@@ -77,20 +76,16 @@ export default function HomeScreen() {
             {
                 loading ? (
                     <Loading />
-                ) : (
+                ) : ( */}
                     <ScrollView
                             showsVerticalScrollIndicator={false}
-                            contentContainerStyle={{ paddingBottom: 10, paddingTop:30 }} >
+                            contentContainerStyle={{paddingBottom: 10}}>
 
                         
                         <BookCarousel />
                         <UniversityBook />
 
                     </ScrollView>
-
-                )
-
-            }
         </View>
 
 
