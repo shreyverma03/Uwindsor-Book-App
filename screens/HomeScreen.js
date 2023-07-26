@@ -12,7 +12,6 @@ import { fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies, searchMo
 import { useNavigation } from '@react-navigation/native';
 import Loading from '../components/loading';
 import { styles } from '../theme';
-
 import moment from 'moment';
 
 const ios = Platform.OS === 'ios';
@@ -52,20 +51,22 @@ export default function HomeScreen() {
 
 
     return (
-        <View className="flex-1">
+        <View className="flex-1" >
+           
             {/* Menu bar */}
-            <SafeAreaView className={ios ? "-mb-2" : "mb-3"} style={{
-                backgroundColor: "#60a7db", borderRadius: 30, paddingTop: 10, marginTop:-10,
-            }}>
+            {/* <SafeAreaView className={ios ? "-mb-2" : "mb-3"} 
+                style={{backgroundColor: "#60a7db", borderRadius: 30, paddingTop: 10, marginTop:-10,}}>
                 <StatusBar />
 
                 
                 <View className="flex-row justify-between items-center mx-3">
+                    
                     <Bars3CenterLeftIcon size="30" strokeWidth={2} color="white" />
                     <Text className="font-bold" style={{ marginStart: -165, fontSize:50 }} >{day} </Text>
                     <Text style={{ marginStart: -205, marginTop: -10, color:"white" }} className="font-bold">
                         {'\n'} {month}{'\n'} {year}</Text>
-
+                     
+        
                     <TouchableOpacity onPress={() => navigation.navigate('Search')}>
                         <MagnifyingGlassIcon size="30" strokeWidth={2} color="white" />
                     </TouchableOpacity>
@@ -75,20 +76,16 @@ export default function HomeScreen() {
             {
                 loading ? (
                     <Loading />
-                ) : (
+                ) : ( */}
                     <ScrollView
                             showsVerticalScrollIndicator={false}
-                            contentContainerStyle={{ paddingBottom: 10, paddingTop:30 }} >
+                            contentContainerStyle={{paddingBottom: 10}}>
 
                         
                         <BookCarousel />
                         <UniversityBook />
 
                     </ScrollView>
-
-                )
-
-            }
         </View>
 
 
