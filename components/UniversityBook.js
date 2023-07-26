@@ -7,18 +7,24 @@ import { useNavigation } from '@react-navigation/native';
 var { width, height } = Dimensions.get('window');
 
 const BookCarousel = ( ) => {
+  const dummyImage= "https://uwindsor.primo.exlibrisgroup.com/discovery/custom/01UTON_UW-UWINDSOR/img/icon_book.png";
   const [books, setBooks] = useState();
   const navigation = useNavigation();
   useEffect(() => {
     fetchBooks();
+    
   }, []);
+
 
 
   const fetchBooks = async () => {
     try {
-      const response = await fetch('https://uwindsor.primo.exlibrisgroup.com/primaws/rest/pub/pnxs?blendFacetsSeparately=false&came_from=pagination_1_2&disableCache=false&getMore=0&inst=01UTON_UW&lang=en&limit=50&multiFacets=facet_tlevel,include,available_p&multiFacets=facet_rtype,include,books&newspapersActive=true&newspapersSearch=false&offset=0&pcAvailability=false&q=any,contains,computer+science&qExclude=&qInclude=facet_library,exact,2181%E2%80%93147948590002181&rapido=false&refEntryActive=false&rtaLinks=true&scope=OCUL_Discovery_Network&searchInFulltextUserSelection=false&skipDelivery=Y&sort=rank&tab=new_Windsor_Omni&vid=01UTON_UW:UWINDSOR');
+      const response = await fetch('https://uwindsor.primo.exlibrisgroup.com/primaws/rest/pub/pnxs?blendFacetsSeparately=false&disableCache=false&getMore=0&inst=01UTON_UW&lang=en&limit=500&multiFacets=facet_rtype,include,book_chapters%7C,%7Cfacet_rtype,include,books%7C,%7Cfacet_library,include,2181%E2%80%93147948590002181%7C,%7Cfacet_topic,include,Computer+Science%7C,%7Cfacet_topic,include,Technology%7C,%7Cfacet_topic,include,Computer+Science,+Theory+%26+Methods%7C,%7Cfacet_topic,include,Computer+Science,+Information+Systems%7C,%7Cfacet_topic,include,Computer+Science,+Artificial+Intelligence%7C,%7Cfacet_topic,include,Computer+Communication+Networks%7C,%7Cfacet_topic,include,Computers%7C,%7Cfacet_topic,include,Computer+Communication+Systems%7C,%7Cfacet_topic,include,Information+Systems+Applications+Incl+Internet%7C,%7Cfacet_topic,include,Database+Management%7C,%7Cfacet_topic,include,Computer+Networks%7C,%7Cfacet_topic,include,Computer+Programming%7C,%7Cfacet_topic,include,Computer+Science%E2%80%94mathematics%7C,%7Cfacet_topic,include,User+Interfaces+Computer+Systems%7C,%7Cfacet_topic,include,Data+Mining%7C,%7Cfacet_topic,include,Electrical+Computer+Engineering%7C,%7Cfacet_topic,include,Computer+Science,+Interdisciplinary+Applications%7C,%7Cfacet_topic,include,Artificial+Intelligence%7C,%7Cfacet_topic,include,Software+Engineering%7C,%7Cfacet_topic,include,Software%7C,%7Cfacet_topic,include,Computer+Simulation%7C,%7Cfacet_tlevel,include,available_p&newspapersActive=true&newspapersSearch=false&offset=0&pcAvailability=false&q=any,contains,computer+science&qExclude=&qInclude=&rapido=false&refEntryActive=false&rtaLinks=true&scope=MyInst_and_CI&searchInFulltextUserSelection=false&skipDelivery=Y&sort=rank&tab=Everything&vid=01UTON_UW:UWINDSOR');
+      //const response = await fetch('http://localhost:5001/custom_api');
       const data = await response.json();
-      
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
       const {docs} = data;
      //const {records} = data;
      const randomBooks = getRandomBooks(docs, 50); 
@@ -41,8 +47,8 @@ const BookCarousel = ( ) => {
   const renderBookItem = ({ item }) => {
    // console.log(item.addata);
     const coverid = item.pnx.addata.isbn;
-  const imageUrl = `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${coverid}/sc.jpg`;
-
+ // const imageUrl = `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${coverid}/sc.jpg`;
+  const imageUrl= item.pnx.addata.isbn ? `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${item.pnx.addata.isbn}/sc.jpg` : dummyImage;
   return (
     <TouchableOpacity onPress={() => handleBookPress(item)}>
       <View>
@@ -54,15 +60,15 @@ const BookCarousel = ( ) => {
               }} 
         className="rounded-3xl" 
         />
-        <Text style={styles.bookTitle}>{item.pnx.display.title}</Text>
+        <Text style={styles.bookTitle}>{item.pnx.display.title[0]?.split(':')[0]}</Text>
       </View>
       </TouchableOpacity>
     );
   };
 
   return (
-    <View>
-          <Text className="text-black text-xl mx-4 mb-5 font-bold">University Books</Text>
+      <View>
+          <Text className="text-black text-xl mx-4 mb-5 font-bold" style={{ paddingTop:10 }}>University Books</Text>
           <Text style={{ color: "#60a7db", marginTop: -35, paddingStart: 15, paddingBottom: 15, fontWeight: 'bold' }}>_____________________________</Text>
       <Carousel
         data={books}
