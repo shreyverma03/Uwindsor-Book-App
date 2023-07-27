@@ -8,6 +8,9 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'; 
 import { LinearGradient } from 'expo-linear-gradient'
 
+import { EmailForm } from './emailForm'
+import { Button } from 'react-native-elements';
+
 const ios = Platform.OS == 'ios';
 const topMargin = ios? '':' mt-3';
 var {width, height} = Dimensions.get('window');
@@ -20,7 +23,6 @@ const UniversityBookDetailsScreen = ({ route }) => {
   const [loading, setLoading] = useState(false);
   
   const { book } = route.params;
- 
   const coverid = route.params.book.pnx.addata.isbn;
   const navigation = useNavigation();
   const imageUrl = `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${coverid}/sc.jpg`;
@@ -103,6 +105,7 @@ const UniversityBookDetailsScreen = ({ route }) => {
 
         </ScrollView>
         </View>
+        <Button title="EMAIL INFO" onPress={() => navigation.navigate('EmailForm')}></Button>
         </View>
         </ScrollView>
 

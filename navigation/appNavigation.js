@@ -10,6 +10,7 @@ import AboutScreen from '../screens/AboutScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MagnifyingGlassIcon} from 'react-native-heroicons/outline'
 import Icon from 'react-native-vector-icons/Ionicons'
+import EmailForm from '../screens/emailForm';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -58,6 +59,7 @@ export default function AppNavigation() {
           options={{ headerShown: false }}
         />
         <Stack.Screen name="OSBookDetails" options={{headerShown: false}} component={OSBookDetailsScreen} />
+        <Stack.Screen name="EmailForm" options={{headerShown: false}} component={EmailForm} />
         <Stack.Screen name="Search" options={{headerShown: false}} component={SearchScreen} />
         <Stack.Screen name="UniversityBookDetails" options={{headerShown: false}} component={UniversityBookDetailsScreen} />
       </Stack.Navigator>
