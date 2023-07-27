@@ -59,9 +59,7 @@ export default function SearchScreen() {
         return shuffledBooks.slice(0, count); // Return the first 'count' books from the shuffled array
       };
      
-      /*  const handleClearSearch = () => {
-          setSearchQuery(''); // Clear the search query
-        };*/
+     
                                                                                                                                                         
       const searchFilterFunction = (text) => {
         if (text) {

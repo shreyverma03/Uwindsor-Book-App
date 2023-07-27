@@ -11,7 +11,7 @@ import AboutScreen from '../screens/AboutScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MagnifyingGlassIcon} from 'react-native-heroicons/outline'
 import Icon from 'react-native-vector-icons/Ionicons'
-
+import EmailForm from '../screens/emailForm';
 import { Image, TouchableWithoutFeedback } from 'react-native';
 
 const Stack = createNativeStackNavigator();
@@ -100,6 +100,7 @@ export default function AppNavigation() {
         <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Drawer" component={MyDrawer}  options={{ headerShown: false }}/>
         <Stack.Screen name="OSBookDetails" options={{headerShown: false}} component={OSBookDetailsScreen} />
+        <Stack.Screen name="EmailForm" options={{headerShown: false}} component={EmailForm} />
         <Stack.Screen name="UniversityBookDetails" options={{headerShown: false}} component={UniversityBookDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>

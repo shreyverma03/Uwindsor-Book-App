@@ -8,6 +8,9 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'; 
 import { LinearGradient } from 'expo-linear-gradient'
 import { Bars3CenterLeftIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
+		
+import { EmailForm } from './emailForm'	
+import { Button } from 'react-native-elements';
 
 const ios = Platform.OS == 'ios';
 const topMargin = ios? '':' mt-3';
@@ -43,7 +46,7 @@ const UniversityBookDetailsScreen = ({ route }) => {
   
   const { book } = route.params;
  
-  const coverid = route.params.book.pnx.addata.isbn[0];
+  const coverid = route.params.book.pnx.addata.isbn;
   const navigation = useNavigation();
   const locationApi ='https://uwindsor.primo.exlibrisgroup.com/primaws/rest/pub/pnxs/L/alma'+route.params.book.pnx.display.mms[0]+'?vid=01UTON_UW:UWINDSOR&lang=en&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&lang=en'
   const dummyImage= "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBlaRpwiZTcfRlQF0AZdjBhve1BECVe5e0BcdAUijnJ8a6AeDakQHReAP1cM_PZgVXICTTJf2XOFev3GoyT14k9KhSVdP5z4vOC-EMBAxLGvMxQ0agZqIonH6BHFKXNbD6qu4tBSTbVJ8W2PRSX5_1_PGsjHqmKruy16qzCy1FR5nzoUIhr17TreaC/w200-h200/Sample%20Paper%20Library%20cbse.jpg";                                                                                                                                                                                                                                                                                                                                                                                                                                   
@@ -141,6 +144,14 @@ const UniversityBookDetailsScreen = ({ route }) => {
         </ScrollView>
         </View>
        
+       		
+		
+        <Button
+      title="EMAIL INFO"
+      onPress={() =>
+        navigation.navigate('EmailForm', { item: book, location: location[0] + ' ' + location[1] })
+      }
+    />
         </View>
         </ScrollView>
 

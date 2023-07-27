@@ -45,7 +45,7 @@ const BookCarousel = () => {
         <Image source={{ uri: imageUrl}} 
         style={{
                 width: width * 0.5,
-                height: height * 0.4
+                height: height * 0.3
               }} 
         className="rounded-3xl" 
         />
