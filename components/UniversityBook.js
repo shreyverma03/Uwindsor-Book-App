@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 var { width, height } = Dimensions.get('window');
 
 const BookCarousel = ( ) => {
-  const dummyImage= "https://uwindsor.primo.exlibrisgroup.com/discovery/custom/01UTON_UW-UWINDSOR/img/icon_book.png";
+  const dummyImage= "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBlaRpwiZTcfRlQF0AZdjBhve1BECVe5e0BcdAUijnJ8a6AeDakQHReAP1cM_PZgVXICTTJf2XOFev3GoyT14k9KhSVdP5z4vOC-EMBAxLGvMxQ0agZqIonH6BHFKXNbD6qu4tBSTbVJ8W2PRSX5_1_PGsjHqmKruy16qzCy1FR5nzoUIhr17TreaC/w200-h200/Sample%20Paper%20Library%20cbse.jpg";
   const [books, setBooks] = useState();
   const navigation = useNavigation();
   useEffect(() => {
@@ -68,7 +68,7 @@ const BookCarousel = ( ) => {
 
   return (
     <View>
-       <Text className="text-black text-xl mx-4 mb-5 font-bold">University Books</Text>
+       <Text className="text-black text-xl mx-4 mb-5 font-bold" style={{ paddingTop:10 }}>University Books</Text>
           <Text style={{ color: "#60a7db", marginTop: -35, paddingStart: 15, paddingBottom: 15, fontWeight: 'bold' }}>_____________________________</Text>
       <Carousel
         data={books}

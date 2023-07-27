@@ -43,10 +43,11 @@ const UniversityBookDetailsScreen = ({ route }) => {
   
   const { book } = route.params;
  
-  const coverid = route.params.book.pnx.addata.isbn;
+  const coverid = route.params.book.pnx.addata.isbn[0];
   const navigation = useNavigation();
   const locationApi ='https://uwindsor.primo.exlibrisgroup.com/primaws/rest/pub/pnxs/L/alma'+route.params.book.pnx.display.mms[0]+'?vid=01UTON_UW:UWINDSOR&lang=en&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&lang=en'
-  const imageUrl = `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${coverid}/sc.jpg`;
+  const dummyImage= "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBlaRpwiZTcfRlQF0AZdjBhve1BECVe5e0BcdAUijnJ8a6AeDakQHReAP1cM_PZgVXICTTJf2XOFev3GoyT14k9KhSVdP5z4vOC-EMBAxLGvMxQ0agZqIonH6BHFKXNbD6qu4tBSTbVJ8W2PRSX5_1_PGsjHqmKruy16qzCy1FR5nzoUIhr17TreaC/w200-h200/Sample%20Paper%20Library%20cbse.jpg";                                                                                                                                                                                                                                                                                                                                                                                                                                   
+  const imageUrl= coverid ? `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${coverid}/sc.jpg` : dummyImage;
   return (
     
     <ScrollView 
@@ -129,7 +130,7 @@ const UniversityBookDetailsScreen = ({ route }) => {
           {
             (book?.pnx.display.contributor || book?.pnx.display.creator)?.map((author, index) => (
               <View key={index} style={{ width: 120,alignItems: 'center', padding: 10 }}>
-                <Image source={{ uri: 'https://static-00.iconduck.com/assets.00/person-icon-476x512-hr6biidg.png' }} style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: 'white' }} />
+                 <Image source={require('../assets/icons/person.png')} style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: 'white' }} />
                 <Text style={{ color: 'white', textAlign: 'center' }}>{author?.split(':')[0]}</Text>
               </View>
             ))
@@ -177,7 +178,8 @@ const UniversityBookDetailsScreen = ({ route }) => {
         const coverid = route.params.item.pnx.addata.isbn;
 
         const navigation = useNavigation();
-        const imageUrl = `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${coverid}/sc.jpg`;
+        const dummyImage= "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBlaRpwiZTcfRlQF0AZdjBhve1BECVe5e0BcdAUijnJ8a6AeDakQHReAP1cM_PZgVXICTTJf2XOFev3GoyT14k9KhSVdP5z4vOC-EMBAxLGvMxQ0agZqIonH6BHFKXNbD6qu4tBSTbVJ8W2PRSX5_1_PGsjHqmKruy16qzCy1FR5nzoUIhr17TreaC/w200-h200/Sample%20Paper%20Library%20cbse.jpg";                                                                                                                                                                                                                                                                                                                                                                                                                                   
+  const imageUrl= coverid ? `https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn=${coverid}/sc.jpg` : dummyImage;
         return (
           
           <ScrollView 

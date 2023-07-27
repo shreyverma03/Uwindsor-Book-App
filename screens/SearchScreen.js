@@ -18,14 +18,14 @@ export default function SearchScreen() {
     const [isLoading, setIsLoading] = useState(false);
     const [loading, setLoading] = useState(false);
     const [results, setResults] = useState([]);
-   
+    const [imageExists, setImageExists] = useState(true);
     const [fullData, setFullData] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [books, setBooks] = useState([]);
     const [filteredDataSource, setFilteredDataSource] = useState([]);
     const [masterDataSource, setMasterDataSource] = useState([]);
 
-    const dummyimage= "https://uwindsor.primo.exlibrisgroup.com/discovery/custom/01UTON_UW-UWINDSOR/img/icon_book.png";
+    const dummyimage= "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBlaRpwiZTcfRlQF0AZdjBhve1BECVe5e0BcdAUijnJ8a6AeDakQHReAP1cM_PZgVXICTTJf2XOFev3GoyT14k9KhSVdP5z4vOC-EMBAxLGvMxQ0agZqIonH6BHFKXNbD6qu4tBSTbVJ8W2PRSX5_1_PGsjHqmKruy16qzCy1FR5nzoUIhr17TreaC/w200-h200/Sample%20Paper%20Library%20cbse.jpg";
     useEffect(() => {
         fetchBooks();
       }, []);
@@ -58,7 +58,11 @@ export default function SearchScreen() {
         const shuffledBooks = books.sort(() => 0.5 - Math.random()); // Shuffle the books array
         return shuffledBooks.slice(0, count); // Return the first 'count' books from the shuffled array
       };
-
+     
+      /*  const handleClearSearch = () => {
+          setSearchQuery(''); // Clear the search query
+        };*/
+                                                                                                                                                        
       const searchFilterFunction = (text) => {
         if (text) {
             setLoading(true);
@@ -88,7 +92,7 @@ export default function SearchScreen() {
       
     
   return (
-    <SafeAreaView className="bg-neutral-800 flex-1">
+    <SafeAreaView className="flex-1">
 
         {/* search input */}
         <View 
@@ -99,12 +103,14 @@ export default function SearchScreen() {
                 value={searchQuery}
                 placeholder="Search Books" 
                 placeholderTextColor={'lightblue'} 
-                className="pb-1 pl-6 flex-1 text-base font-semibold text-white tracking-wider" 
+                className="pb-1 pl-6 flex-1 text-base font-semibold tracking-wider"  
             />
             <TouchableOpacity 
-                onPress={()=> navigation.navigate('Home')}
-                className="rounded-full p-3 m-1 bg-neutral-500" 
-            >
+                onPress={()=>{ 
+                   // handleClearSearch(); // Clear the search query first    
+                navigation.navigate('Home')
+            }}
+                className="rounded-full p-3 m-1 bg-gray-500">
                 <XMarkIcon size="25" color="white" />
                 
             </TouchableOpacity>
@@ -121,7 +127,7 @@ export default function SearchScreen() {
                     contentContainerStyle={{paddingHorizontal:15}}
                     className="space-y-3"
                 >
-                    <Text className="text-white font-semibold ml-1">Results ({filteredDataSource.length})</Text>
+                    <Text className="font-bold ml-1" style={{color: "#60a7db"}}>Results ({filteredDataSource.length})</Text>
                     <View className="flex-row justify-between flex-wrap">
                         {
                             filteredDataSource.map((item, index)=>{
@@ -134,10 +140,11 @@ export default function SearchScreen() {
                                         <View className="space-y-2 mb-4">
                                             <Image
                                             source={{ uri: item.imageUrl === dummyimage ? dummyimage : item.imageUrl }}
+                                            onError={()=>console.log("Testttt123")}
                                             className="rounded-3xl" 
                                             style={{ width: width*0.44, height: height*0.3}} // adjust the width and height as per your requirement
                                             />
-                                            <Text className="text-gray-300 ml-1">
+                                            <Text className="ml-1" style={{ color: "#60a7db", fontSize: 13 }}>
                                                 {
                                                    
                                                     item.pnx.display.title[0].length>22? item.pnx.display.title[0].slice(0,22)+'...': item.pnx.display.title
@@ -154,8 +161,8 @@ export default function SearchScreen() {
                 ):(
                     
                     <View >
-                        <Text className="text-white font-semibold ml-1" style={{marginTop:height*0.02}}>Results ({filteredDataSource.length}) </Text>
-                        <View className="flex-row justify-center" style={{marginTop:height*0.15}}>
+                        <Text className="font-bold ml-1" style={{color: "#60a7db"}}>Results ({filteredDataSource.length})</Text>
+                        <View className="flex-row justify-center" style={{marginTop:height*0.05}}>
                         <Image 
                             source={require('../assets/images/booktime2.png')} 
                             className="h-96 w-96"

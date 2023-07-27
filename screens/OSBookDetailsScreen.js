@@ -89,7 +89,7 @@ const OSBookDetailsScreen = ({ route }) => {
           {
             book?.author_name.map((author, index) => (
               <View key={book.author_key[index]} style={{ alignItems: 'center', padding: 10 }}>
-                <Image source={{ uri: 'https://static-00.iconduck.com/assets.00/person-icon-476x512-hr6biidg.png' }} style={{width: 80, height: 80, borderRadius: 40, backgroundColor: 'white' }} />
+                <Image source={require('../assets/icons/person.png')} style={{ width: 70, height: 70, borderRadius: 40, backgroundColor: 'white' }} />
                 <Text style={{ color: 'white', textAlign: 'center' }}>{author}</Text>
               </View>
             ))
