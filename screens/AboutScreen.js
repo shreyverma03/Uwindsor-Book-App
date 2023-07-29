@@ -3,10 +3,7 @@ import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 
 const AboutScreen = () => {
     return (
-        <ImageBackground
-            source={require('../assets/download.png')}
-            style={styles.backgroundImage}
-            resizeMode="cover">
+        
         <View style={styles.container}>
             <Text className="text-black text-xl mx-4 mb-5 font-bold" style={styles.title}>About the Book App</Text>
             <Text style={{ color: "#60a7db", marginTop: -25, paddingStart: 15, paddingBottom: 15, fontWeight: 'bold' }}>____________________________________</Text>
@@ -28,7 +25,7 @@ const AboutScreen = () => {
                 Hanikumari Patel
             </Text>
         </View>
-        </ImageBackground>
+  
     );
 };
 
