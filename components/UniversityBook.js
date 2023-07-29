@@ -55,8 +55,8 @@ const BookCarousel = ( ) => {
         
         <Image source={{ uri: imageUrl}} 
         style={{
-                width: width * 0.5,
-                height: height * 0.3
+                width: width * 0.3,
+                height: height * 0.2
               }} 
         className="rounded-3xl" 
         />
@@ -67,15 +67,15 @@ const BookCarousel = ( ) => {
   };
 
   return (
-    <View>
-       <Text className="text-black text-xl mx-4 mb-5 font-bold" style={{ paddingTop:10 }}>University Books</Text>
-          <Text style={{ color: "#60a7db", marginTop: -35, paddingStart: 15, paddingBottom: 15, fontWeight: 'bold' }}>_____________________________</Text>
+      <View>
+          <Text className=" text-xl mx-4 mb-5 font-bold" style={{ fontFamily: 'Times New Roman', fontSize: 25, paddingTop:20 }} >University Books</Text>
+         
       <Carousel
         data={books}
         renderItem={renderBookItem}
         inactiveSlideOpacity={0.60}
             sliderWidth={width}
-            itemWidth={width*0.62}
+              itemWidth={width * 0.36}
             slideStyle={{display: 'flex', alignItems: 'center'}}
       />
     </View>
@@ -85,9 +85,11 @@ const BookCarousel = ( ) => {
 const styles = StyleSheet.create({
 
   bookTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginTop: 10,
+        fontSize: 14,
+        marginTop: 10,
+        color: '#60a20b',
+        fontFamily: 'Times New Roman',
+        fontWeight: 'bold'
   },
 
 });
