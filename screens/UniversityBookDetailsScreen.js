@@ -91,7 +91,7 @@ const UniversityBookDetailsScreen = ({ route }) => {
 
         <View style={{marginTop: -(height*0.09)}} className="space-y-3">
         {/* title */}
-        <Text className="text-white text-center text-3xl font-bold tracking-widest">
+              <Text className="text-white text-center text-3xl font-bold tracking-widest" style={{ fontFamily: 'Times New Roman' } }>
             {
                 book?.pnx.display.title[0]?.split(':')[0]
             }
@@ -99,34 +99,34 @@ const UniversityBookDetailsScreen = ({ route }) => {
         <Text style={{ textAlign: 'center', color: 'white', padding: 10, fontWeight: 'bold' }}>_____________________________</Text>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <View style={{ flex: 1 }}>
-                          <Text style={{ textAlign: 'center', color: '#60a7db', paddingStart: 10, fontSize:18, fontWeight: 'bold', }}>Published Year</Text>
-                      <Text style={{ textAlign: 'center', color: 'white',  }}>{book?.pnx.addata.date}</Text>
+                      <Text style={{ textAlign: 'center', color: '#60a7db', paddingStart: 10, fontSize: 18, fontFamily: 'Times New Roman', fontWeight: 'bold', }}>Published Year</Text>
+                      <Text style={{ textAlign: 'center', color: 'white', fontFamily: 'Times New Roman'  }}>{book?.pnx.addata.date}</Text>
   </View>
   <View style={{ flex: 1 }}>
-                          <Text style={{ textAlign: 'center', color: '#60a7db', fontSize: 18, fontWeight: 'bold', }}>Publisher</Text>
-                      <Text style={{ textAlign: 'center', color: 'white', flexDirection: 'column',  }}>{book?.pnx.display.publisher || 'N/A'}</Text>
+                      <Text style={{ textAlign: 'center', color: '#60a7db', fontSize: 18, fontFamily: 'Times New Roman', fontWeight: 'bold', }}>Publisher</Text>
+                      <Text style={{ textAlign: 'center', color: 'white', flexDirection: 'column', fontFamily: 'Times New Roman' }}>{book?.pnx.display.publisher || 'N/A'}</Text>
   </View>
   <View style={{ flex: 1 }}>
-                          <Text style={{ textAlign: 'center', color: '#60a7db', fontSize: 18, fontWeight: 'bold', }}>Language</Text>
-                      <Text style={{ textAlign: 'center', color: 'white'  }}>{book?.pnx.display.language}</Text>
+                      <Text style={{ textAlign: 'center', color: '#60a7db', fontSize: 18, fontWeight: 'bold', fontFamily: 'Times New Roman' }}>Language</Text>
+                      <Text style={{ textAlign: 'center', color: 'white', fontFamily: 'Times New Roman' }}>{book?.pnx.display.language}</Text>
   </View>
 </View>
 
 <View >
-<Text style={{ textAlign: 'center', color: '#60a7db', paddingStart: 10, fontSize:18, fontWeight: 'bold',paddingBottom:10 }}>Leddy Library Location</Text>
+                  <Text style={{ textAlign: 'center', color: '#60a7db', paddingStart: 10, fontSize: 18, fontFamily: 'Times New Roman',fontWeight: 'bold',paddingBottom:10 }}>Leddy Library Location</Text>
 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <View style={{ flex: 1 }}>
-                      <Text style={{ textAlign: 'center', color: 'white',  }}>{location[0]}</Text>
+                          <Text style={{ textAlign: 'center', color: 'white', fontFamily: 'Times New Roman'  }}>{location[0]}</Text>
        </View>
         <View style={{ flex: 1 }}>
                         
-                      <Text style={{ textAlign: 'center', color: 'white', flexDirection: 'column',  }}>{location[1]}</Text>
+                          <Text style={{ textAlign: 'center', color: 'white', flexDirection: 'column', fontFamily: 'Times New Roman'  }}>{location[1]}</Text>
         </View>
         </View>
   </View>
         
 <View style={{ marginTop: 20, paddingTop: 40, paddingStart: 20 }}>
-                      <Text style={{ color: '#60a7db', fontWeight: 'bold', fontSize: 18,  }}>Authors</Text>
+                  <Text style={{ color: '#60a7db', fontWeight: 'bold', fontSize: 18, fontFamily: 'Times New Roman' }}>Authors</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
@@ -134,7 +134,7 @@ const UniversityBookDetailsScreen = ({ route }) => {
             (book?.pnx.display.contributor || book?.pnx.display.creator)?.map((author, index) => (
               <View key={index} style={{ width: 120,alignItems: 'center', padding: 10 }}>
                  <Image source={require('../assets/icons/person.png')} style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: 'white' }} />
-                <Text style={{ color: 'white', textAlign: 'center' }}>{author?.split(':')[0]}</Text>
+                    <Text style={{ color: 'white', textAlign: 'center', fontFamily: 'Times New Roman' }}>{author?.split(':')[0]}</Text>
               </View>
             ))
           }
@@ -145,9 +145,9 @@ const UniversityBookDetailsScreen = ({ route }) => {
         </View>
        
        		
-		
-        <Button
-      title="EMAIL INFO"
+
+    <Button
+      title="SHARE VIA EMAIL"
       onPress={() =>
         navigation.navigate('EmailForm', { item: book, location: location[0] + ' ' + location[1] })
       }
@@ -182,7 +182,7 @@ const UniversityBookDetailsScreen = ({ route }) => {
           }
         };
        
-        const { book } = route.params;
+        const { item } = route.params;
        // console.log("route00="+JSON.stringify(route.params));
         //console.log("route100="+JSON.stringify(route));
         const locationApi ='https://uwindsor.primo.exlibrisgroup.com/primaws/rest/pub/pnxs/L/alma'+route.params.item.pnx.display.mms[0]+'?vid=01UTON_UW:UWINDSOR&lang=en&search_scope=MyInst_and_CI&adaptor=Local%20Search%20Engine&lang=en'
@@ -283,6 +283,13 @@ const UniversityBookDetailsScreen = ({ route }) => {
       
               </ScrollView>
               </View>
+
+              <Button
+      title="SHARE VIA EMAIL"
+      onPress={() =>
+        navigation.navigate('EmailForm', { item: item, location: location[0] + ' ' + location[1] })
+      }
+    />
               </View>
               </ScrollView>
       

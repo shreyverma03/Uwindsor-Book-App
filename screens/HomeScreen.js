@@ -45,13 +45,28 @@ export default function HomeScreen() {
         setLoading(false)
     }
 
+    let timeOfDay;
     const day = moment().format(" DD ");
     const month = moment().format("MMM");
     const year = moment().format("YYYY");
+    const hours = moment().format("HH");
 
+    if (hours < 12) {
+        timeOfDay = 'Morning';
+    } else if (hours >= 12 && hours < 17) {
+        timeOfDay = 'Afternoon';
+    }
+    else {
+        timeOfDay = 'Evening';
+    }
 
     return (
         <View className="flex-1">
+            <Text className=" text-xl mx-4 mb-5 font-bold" style={{ fontFamily: 'Times New Roman', color: "#f6c12d", fontSize:30 }}>
+                <Text style={{ fontSize: 17 }}>Good {timeOfDay}</Text>{'\n'}  Lancer...</Text>
+            <Text className=" text-xl mx-4 mb-5 font-bold" style={{ fontFamily: 'Times New Roman', color: "#60a7db", marginTop: -80, fontSize: 30 }}>
+                <Text style={{ fontSize: 17 }}>Good {timeOfDay}</Text>{'\n'}  Lancer...</Text>
+            
             {/* Menu bar */}
             {/* <SafeAreaView className={ios ? "-mb-2" : "mb-3"} style={{
                 backgroundColor: "#60a7db", borderRadius: 30, paddingTop: 10, marginTop:-10,
@@ -77,6 +92,9 @@ export default function HomeScreen() {
                 loading ? (
                     <Loading />
                 ) : ( */}
+
+            
+
                     <ScrollView
                             showsVerticalScrollIndicator={false}
                             contentContainerStyle={{paddingBottom: 10}}>

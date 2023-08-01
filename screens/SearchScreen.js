@@ -160,11 +160,10 @@ export default function SearchScreen() {
                     
                     <View >
                         <Text className="font-bold ml-1" style={{color: "#60a7db"}}>Results ({filteredDataSource.length})</Text>
-                        <View className="flex-row justify-center" style={{marginTop:height*0.05}}>
-                        <Image 
-                            source={require('../assets/images/booktime2.png')} 
-                            className="h-96 w-96"
-                        />
+                        <View className="flex-row justify-center" style={{marginTop:-150}}>
+
+                                  <Loading />
+                                  
                         </View>
                     </View>
                 )
